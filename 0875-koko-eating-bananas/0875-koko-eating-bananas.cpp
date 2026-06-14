@@ -25,7 +25,7 @@ public:
             int mid = lo + ( hi - lo )/2 ;
             sum =0 ; // imp 
             for( auto x : piles ){
-                sum += (x + mid - 1) / mid; // important 
+                sum += ceil(double(x)/double(mid)) ;
             }
             if( sum <= h ){
                 ans =mid ;
