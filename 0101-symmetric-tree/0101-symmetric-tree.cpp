@@ -24,8 +24,14 @@ public:
         return same( root->left , node->right ) && same( root->right , node->left ) ;
     }
     bool isSymmetric(TreeNode* root) {
+        // Edge case: An empty tree is symmetric. Without this check, root->left/right would dereference a null pointer.
+        if (root == nullptr) {
+            return true;
+        }
         return same( root->left , root->right ) ;
     }
+    // Time Complexity: O(N), where N is the number of nodes, as each node is visited once.
+    // Space Complexity: O(H), where H is the height of the tree due to recursion stack.
 };
 
 // Synced seamlessly with LeetHub Pro
