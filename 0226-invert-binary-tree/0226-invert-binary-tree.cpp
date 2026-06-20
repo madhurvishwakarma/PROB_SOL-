@@ -28,22 +28,13 @@
 // };
 class Solution {
 public:
-    void copy(TreeNode* root, TreeNode*& node) {    // very important that we have to pass by refrence and not by value 
-        if (root == NULL) {
-            node = NULL;
-            return;
-        }
-
-        node = new TreeNode(root->val);
-
-        // Invert while copying
-        copy(root->right, node->left);
-        copy(root->left, node->right);
-    }
-
     TreeNode* invertTree(TreeNode* root) {
-        TreeNode* node = NULL;
-        copy(root, node);
+        if( root == NULL ){
+            return NULL ;
+        }
+        TreeNode* node = new TreeNode( root->val );
+        node->right = invertTree( root->left ) ;
+        node->left = invertTree( root ->right ) ;
         return node;
     }
 };
