@@ -24,44 +24,35 @@ public:
 
     TreeNode* deserialize(string data) {
         if(data.size() == 0) return NULL;
-        
-        // Step 1: split string by ","
-        vector<string> vals;
-        string curr = "";
-        for(char c : data) {
-            if(c == ',') {
-                vals.push_back(curr);
-                curr = "";
-            } else {
-                curr += c;
+        stringstream st(data) ;
+        string s ;
+        getline( st , s , ',') ;
+        TreeNode* root = new TreeNode(stoi(s)) ;
+        queue<TreeNode*> q ;
+        q.push( root ) ;
+        while( !q.empty() ){
+            TreeNode* node = q.front() ;
+            q.pop() ;
+            getline( st , s , ',') ;
+            if( s == "#" ){
+                node->left = NULL ;
+            }
+            else{
+                TreeNode* nodeL = new TreeNode(stoi(s)) ;
+                node->left = nodeL ;
+                q.push(node->left) ;
+            }
+            getline(st , s, ',') ;
+            if( s == "#"){
+                node->right = NULL ;
+            }
+            else{
+                TreeNode* nodeR = new TreeNode(stoi(s)) ;
+                node->right = nodeR ;
+                q.push(node->right ) ;
             }
         }
-        
-        // Step 2: BFS reconstruction
-        TreeNode* root = new TreeNode(stoi(vals[0]));
-        queue<TreeNode*> q;
-        q.push(root);
-        int i = 1;  // start from index 1 (skip root)
-        
-        while(!q.empty() && i < vals.size()) {
-            TreeNode* node = q.front();
-            q.pop();
-            
-            // Left child
-            if(vals[i] != "#") {
-                node->left = new TreeNode(stoi(vals[i]));
-                q.push(node->left);
-            }
-            i++;
-            
-            // Right child
-            if(i < vals.size() && vals[i] != "#") {
-                node->right = new TreeNode(stoi(vals[i]));
-                q.push(node->right);
-            }
-            i++;
-        }
-        return root;
+        return root ;
     }
 };
 
