@@ -15,15 +15,18 @@ public:
         if( root == NULL ){
             return ;
         }
-        stack<TreeNode*> s ;
-        s.push(root) ;
-        while( !s.empty() ){
-            TreeNode* node = s.top() ;
-            s.pop() ;
-            if( node->right ) {s.push( node->right) ;}
-            if( node->left ) {s.push(node->left) ;}
-            if( !s.empty()) {node->right = s.top() ;}
-            node->left = NULL ;
+        TreeNode* node = root ;
+        while( node != NULL ){
+            if( node->left != NULL ){
+                TreeNode* prev = node->left ;
+                while( prev->right ){
+                    prev = prev->right ;
+                }
+                prev->right = node->right ;
+                node->right = node->left ;
+                node->left = NULL ;
+            }
+            node = node->right ;
         }
     }
 };
