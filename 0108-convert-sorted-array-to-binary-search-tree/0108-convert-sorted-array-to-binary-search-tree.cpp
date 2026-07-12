@@ -10,24 +10,21 @@
  */
 class Solution {
 public:
-    TreeNode* BST( vector<int>& nums , int start , int end ){
-        // Added check for start > end to prevent invalid index access
+    TreeNode* BST( vector<int>& arr , int start , int end ){
+        if( arr.size() == 0 ){
+            return NULL ;
+        }
         if( start > end ){
             return NULL ;
         }
-        if( nums.size() == 0 ){
-            return NULL ;
-        }
         int mid = start + (end-start)/2 ;
-        TreeNode* node = new TreeNode(nums[mid]) ;
-        node->left = BST( nums , start , mid-1 ) ; // Fixed: mid-1 for left subtree
-        node->right = BST( nums , mid+1 , end ) ;
-        return node ;
+        TreeNode* node = new TreeNode(arr[mid]);
+        node->left = BST( arr , start , mid-1 ) ;
+        node->right = BST( arr , mid+1 , end ) ;
+        return node;
     }
     TreeNode* sortedArrayToBST(vector<int>& nums) {
-        int start = 0 ;
-        int end = nums.size()-1 ;
-        return BST( nums , start , end ) ;
+        return BST( nums , 0 , nums.size()-1 ) ;
     }
 };
 
