@@ -15,19 +15,19 @@ class Node {
 
 class Solution {
   public:
-    int findMax( Node* root , int& maxi ){
+    int find( Node* root , int& maxi ){
         if( root == NULL ){
             return 0 ;
         }
-        int lh = findMax( root->left , maxi ) ;
-        int rh = findMax( root->right , maxi ) ;
-        maxi = max( maxi , lh+rh ) ;
-        return 1+ max( lh , rh ) ;
+        int lh = max(0,find(root->left,maxi)) ;
+        int rh = max(0,find(root->right , maxi)) ;
+        maxi = max( maxi , lh+rh) ;
+        return 1+max(lh,rh) ;
     }
     int diameter(Node* root) {
         // code here
         int maxi= 0 ;
-        findMax( root , maxi ) ;
+        find( root , maxi ) ;
         return maxi ;
     }
 };
