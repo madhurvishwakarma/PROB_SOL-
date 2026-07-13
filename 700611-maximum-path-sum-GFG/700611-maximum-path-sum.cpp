@@ -15,14 +15,14 @@ public:
 
 class Solution {
   public:
-    int find( Node* root , int& maxSum ){
+    int find(Node* root , int& maxi ){
         if( root == NULL ){
             return 0 ;
         }
-        int ls = max(0 , find( root->left , maxSum )) ;
-        int rs = max( 0 , find( root->right , maxSum )) ;
-        maxSum = max( maxSum , root->data+ ls+rs ) ;
-        return root->data + max( ls, rs ) ;
+        int l = max( 0 , find(root->left , maxi)) ;
+        int r = max( 0 , find(root->right , maxi )) ;
+        maxi = max( maxi , root->data + l + r ) ;
+        return root->data + max( l, r) ;
     }
     int findMaxSum(Node *root) {
         // code here
