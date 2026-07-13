@@ -20,20 +20,19 @@ class Solution {
         if( root == NULL ){
             return v ;
         }
-        map< int , int > mp ;
-        queue<pair<Node*  , int >> q ;
-        q.push({ root , 0 }) ;
-        while( !q.empty() ){
-            auto it = q.front() ;
+        map<int,int> mp ;
+        queue<pair<Node*,int>> q ;
+        q.push({root , 0 }) ;
+        while( !q.empty()){
+            Node* node = q.front().first ;
+            int index = q.front().second ;
             q.pop() ;
-            Node* node = it.first ;
-            int l = it.second ;
-            if( mp.find(l) == mp.end()) mp[l] = node->data ;
-            if( node->left ) q.push({node->left , l-1 }) ;
-            if( node->right ) q.push({ node->right , l+1 }) ;
+            if( mp.find(index) == mp.end()) mp[index] = node->data ;
+            if( node->left ) q.push({node->left , index-1}) ;
+            if( node->right ) q.push({node->right , index+1}) ;
         }
-        for( auto x : mp ){
-            v.push_back( x.second ) ;
+        for(auto it : mp ){
+            v.push_back(it.second) ;
         }
         return v ;
     }
