@@ -14,7 +14,7 @@ public:
                     continue ;
                 }
                 if( obstacleGrid[i][j] == 1 ){
-                    curr[j] = 0 ;
+                    // curr[j] = 0 ;
                     continue ;
                 }
                 curr[j] = dp[j] ;
